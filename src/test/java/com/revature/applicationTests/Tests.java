@@ -7,7 +7,6 @@ import org.junit.Test;
 import com.revature.model.Account;
 import com.revature.repository.BankingDAO;
 import com.revature.service.AccService;
-import static com.revature.controller.Menus.*;
 
 
 
@@ -24,14 +23,7 @@ public class Tests {
   public void tearDown() {
     accS = null;
   }
-  
-//  @Test
-//  public void checkLoginWithInvalidCredetials() {
-//    BankingDAO bd = new BankingDAO();
-//    Account accnt = new Account("mo", "hade23");
-//    assertTrue(bd.login(accnt) == false);
-//  }
-//  
+
   @Test
   public void checkNegativeDepositTest(){
     
@@ -46,13 +38,5 @@ public class Tests {
     Account accnt = new Account("moe", "hamade123");
     assertTrue(bd.login(accnt) == true);
   }
-  
-
-
-  
-  
-  
-  
-  
   
 }

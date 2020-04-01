@@ -6,6 +6,7 @@ import com.revature.repository.BankingDAO;
 public class AccService {
     
   private static BankingDAO bd = new BankingDAO();
+  
   public boolean createAccount (Account a) {
            return  bd.addAccount(a);
   }
@@ -21,8 +22,5 @@ public class AccService {
   
   public boolean transfer(int id, String user_name, double num) {
     return bd.transferBetweenAccounts(id, user_name, num);
-  }
-  
-  
-  
+  }  
 }

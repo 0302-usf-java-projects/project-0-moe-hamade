@@ -7,13 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import com.revature.model.Account;
-import com.revature.controller.*;
 import static com.revature.controller.Menus.*;
 
 public class BankingDAO implements DAOInterface {
   
-  
-Account accnt = new Account();
+  Account accnt = new Account();
 
   @Override
   public boolean addAccount(Account account) {
@@ -29,12 +27,12 @@ Account accnt = new Account();
      return true;
     }catch(SQLException e) {
       e.printStackTrace();    
-  }
+      }
     } else {
-      return false;
-    }
-    return false;
- }
+          return false;
+  }
+            return false;
+}
   
 
   @Override
@@ -49,14 +47,12 @@ Account accnt = new Account();
       account.setId(rs.getInt(1));
       account.setUsername(rs.getString(2));
       account.setBalance(rs.getDouble(5));
-      System.out.println("We have identified your credentials. " + account.getUsername() + " you are now logged in");
+      System.out.println("\nWe have identified your credentials. " + account.getUsername() + " you are now logged in.");
       return true;
       
     }catch(SQLException e) {
-      System.out.println("We could not log you in, please try again");
-      
-      mainMenu();
-      
+      System.out.println("We could not log you in, please try again.");
+      mainMenu();  
     }
     return false;
   }
@@ -77,12 +73,12 @@ Account accnt = new Account();
       
     }catch(SQLException e) {
       e.printStackTrace();
-    }
-    } else {
+      }
+    }else {
       return -1;
-    }
-    return -1;
   }
+        return -1;
+}
   
   @Override
   public double withdrawMoney(int id, double wd) {
@@ -107,26 +103,24 @@ Account accnt = new Account();
   @Override
   public boolean authenticateUser(String username) {
    try (Connection conn = ConnectionUtil.connect()){
-   String sql = "select exists(select 1 from account where username = '" + username + "')";
-   PreparedStatement ps = conn.prepareStatement(sql);
-   ResultSet rs = ps.executeQuery();
-   rs.next();
-   boolean match = rs.getBoolean(1);
-   return match;
-   
-   
+     String sql = "select exists(select 1 from account where username = '" + username + "')";
+     PreparedStatement ps = conn.prepareStatement(sql);
+     ResultSet rs = ps.executeQuery();
+     rs.next();
+     boolean match = rs.getBoolean(1);
+     return match;
    
    }catch(SQLException e) {
      e.printStackTrace();
-   }
-    return false;
-  }
+     }
+      return false;
+ }
 
 
   @Override
   public boolean transferBetweenAccounts(int id, String user_name, double num) {
    if(authenticateUser(user_name)) {
-       try(Connection conn = ConnectionUtil.connect()){
+      try(Connection conn = ConnectionUtil.connect()){
          String sql = "{? = call transferBetweenAccounts(?,?,?) }";
          CallableStatement cs = conn.prepareCall(sql);
          cs.registerOutParameter(1,Types.DOUBLE);
